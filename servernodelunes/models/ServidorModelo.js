@@ -3,8 +3,7 @@ const express = require('express')
 //IMPORTAR LA FUNCION PARA CONECTARME CON LA BD
 const { conectarBD } = require('../database/conexion.js')
 
-// Importar las rutas del Servidor (API)
-const rutas = require ('../routes/rutas.js')
+const rutas = require('../routes/rutas.js')
 
 class ServidorModelo {
 
@@ -12,6 +11,7 @@ class ServidorModelo {
 
         this.app = express();
         //this.despertarBD();
+        this.llamarAuxiliares();
         this.enrutarPeticiones();
 
     }
@@ -26,12 +26,19 @@ class ServidorModelo {
 
     enrutarPeticiones() {
 
-        this.app.use('/', rutas)
+        this.app.use("/", rutas);
+
     }
 
     despertarBD() {
 
         conectarBD()
+
+    }
+
+    llamarAuxiliares() {
+
+        this.app.use(express.json())
 
     }
 

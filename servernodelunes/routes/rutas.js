@@ -1,26 +1,20 @@
-//Importar una clase de expres para separar mis rutas
-const {Router}= require('express')
+const { Router } = require('express')
+const rutas = Router();
 
-//usar esa clase
-const rutas=Router()
+//IMPORTO LOS CONTROLADORES
 
-//Listado de Rutas
+const { registrarJugador } = require('../controllers/controlador.js')
+const { buscarJugador } = require('../controllers/controlador.js')
+const { buscarJugadores } = require('../controllers/controlador.js')
+const { editarJugador } = require('../controllers/controlador.js')
+const { eliminarJugador } = require('../controllers/controlador.js')
 
-rutas.get('/avanzada/v1/jugadores', function (req, res) {
-    res.send('Hello World')
-})
 
-rutas.post('/avanzada/v1/jugadores', function (req, res) {
-    res.send('Hello World')
-})
 
-rutas.put('/avanzada/v1/jugadores', function (req, res) {
-    res.send('Hello World')
-})
+rutas.get('/avanzada/v1/jugadores', buscarJugadores)
+rutas.get('/avanzada/v1/jugadores/:id', buscarJugador)
+rutas.post('/avanzada/v1/jugadores', registrarJugador)
+rutas.put('/avanzada/v1/jugadores/:id', editarJugador)
+rutas.delete('/avanzada/v1/jugadores/:id', eliminarJugador)
 
-rutas.delete('/avanzada/v1/jugadores', function (req, res) {
-    res.send('Hello World')
-})
-
-//exportar rutas
 module.exports = rutas
